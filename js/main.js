@@ -1,149 +1,118 @@
-;(function () {
-	
-	'use strict';
+(function($){
+    $.fn.scrollingTo = function( opts ) {
+        var defaults = {
+            animationTime : 1000,
+            easing : '',
+            callbackBeforeTransition : function(){},
+            callbackAfterTransition : function(){}
+        };
 
-	var isMobile = {
-		Android: function() {
-			return navigator.userAgent.match(/Android/i);
-		},
-			BlackBerry: function() {
-			return navigator.userAgent.match(/BlackBerry/i);
-		},
-			iOS: function() {
-			return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-		},
-			Opera: function() {
-			return navigator.userAgent.match(/Opera Mini/i);
-		},
-			Windows: function() {
-			return navigator.userAgent.match(/IEMobile/i);
-		},
-			any: function() {
-			return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-		}
-	};
+        var config = $.extend( {}, defaults, opts );
 
-	
-	var fullHeight = function() {
+        $(this).click(function(e){
+            var eventVal = e;
+            e.preventDefault();
 
-		if ( !isMobile.any() ) {
-			$('.js-fullheight').css('height', $(window).height());
-			$(window).resize(function(){
-				$('.js-fullheight').css('height', $(window).height());
-			});
-		}
-	};
+            var $section = $(document).find( $(this).data('section') );
+            if ( $section.length < 1 ) {
+                return false;
+            };
 
-	// Parallax
-	var parallax = function() {
-		$(window).stellar();
-	};
+            if ( $('html, body').is(':animated') ) {
+                $('html, body').stop( true, true );
+            };
 
-	var contentWayPoint = function() {
-		var i = 0;
-		$('.animate-box').waypoint( function( direction ) {
+            var scrollPos = $section.offset().top;
 
-			if( direction === 'down' && !$(this.element).hasClass('animated-fast') ) {
-				
-				i++;
+            if ( $(window).scrollTop() == scrollPos ) {
+                return false;
+            };
 
-				$(this.element).addClass('item-animate');
-				setTimeout(function(){
+            config.callbackBeforeTransition(eventVal, $section);
 
-					$('body .animate-box.item-animate').each(function(k){
-						var el = $(this);
-						setTimeout( function () {
-							var effect = el.data('animate-effect');
-							if ( effect === 'fadeIn') {
-								el.addClass('fadeIn animated-fast');
-							} else if ( effect === 'fadeInLeft') {
-								el.addClass('fadeInLeft animated-fast');
-							} else if ( effect === 'fadeInRight') {
-								el.addClass('fadeInRight animated-fast');
-							} else {
-								el.addClass('fadeInUp animated-fast');
-							}
-
-							el.removeClass('item-animate');
-						},  k * 100, 'easeInOutExpo' );
-					});
-					
-				}, 50);
-				
-			}
-
-		} , { offset: '85%' } );
-	};
+            $('html, body').animate({
+                'scrollTop' : (scrollPos+'px' )
+            }, config.animationTime, config.easing, function(){
+                config.callbackAfterTransition(eventVal, $section);
+            });
+        });
+    };
+}(jQuery));
 
 
 
-	var goToTop = function() {
-
-		$('.js-gotop').on('click', function(event){
-			
-			event.preventDefault();
-
-			$('html, body').animate({
-				scrollTop: $('html').offset().top
-			}, 500, 'easeInOutExpo');
-			
-			return false;
-		});
-
-		$(window).scroll(function(){
-
-			var $win = $(window);
-			if ($win.scrollTop() > 200) {
-				$('.js-top').addClass('active');
-			} else {
-				$('.js-top').removeClass('active');
-			}
-
-		});
-	
-	};
-
-	var pieChart = function() {
-		$('.chart').easyPieChart({
-			scaleColor: false,
-			lineWidth: 4,
-			lineCap: 'butt',
-			barColor: '#FF9000',
-			trackColor:	"#f5f5f5",
-			size: 160,
-			animate: 1000
-		});
-	};
-
-	var skillsWayPoint = function() {
-		if ($('#fh5co-skills').length > 0 ) {
-			$('#fh5co-skills').waypoint( function( direction ) {
-										
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-					setTimeout( pieChart , 400);					
-					$(this.element).addClass('animated');
-				}
-			} , { offset: '90%' } );
-		}
-
-	};
+jQuery(document).ready(function(){
+	"use strict";
+	new WOW().init();
 
 
-	// Loading page
-	var loaderPage = function() {
-		$(".fh5co-loader").fadeOut("slow");
-	};
-
-	
-	$(function(){
-		contentWayPoint();
-		goToTop();
-		loaderPage();
-		fullHeight();
-		parallax();
-		// pieChart();
-		skillsWayPoint();
-	});
-
-
+(function(){
+ jQuery('.smooth-scroll').scrollingTo();
 }());
+
+});
+
+
+
+
+$(document).ready(function(){
+
+
+
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 50) {
+            $(".navbar-brand a").css("color","#fff");
+            $("#top-bar").removeClass("animated-header");
+        } else {
+            $(".navbar-brand a").css("color","inherit");
+            $("#top-bar").addClass("animated-header");
+        }
+    });
+
+    $("#clients-logo").owlCarousel({
+ 
+        itemsCustom : false,
+        pagination : false,
+        items : 5,
+        autoplay: true,
+
+    })
+
+});
+
+
+
+// fancybox
+$(".fancybox").fancybox({
+    padding: 0,
+
+    openEffect : 'elastic',
+    openSpeed  : 450,
+
+    closeEffect : 'elastic',
+    closeSpeed  : 350,
+
+    closeClick : true,
+    helpers : {
+        title : { 
+            type: 'inside' 
+        },
+        overlay : {
+            css : {
+                'background' : 'rgba(0,0,0,0.8)'
+            }
+        }
+    }
+});
+
+
+
+
+
+
+ 
+
+
+
+
