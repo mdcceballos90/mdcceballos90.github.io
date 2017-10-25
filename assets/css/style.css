@@ -248,7 +248,7 @@ a,
 }
 
 .bg-dark {
-  background: #111;
+  background: #111625;
 }
 
 .bg-dark-30:before {
@@ -708,13 +708,13 @@ a,
 }
 
 .btn.btn-d {
-  background: rgba(17, 17, 17, 0.8);
+  background: rgba(52, 25, 49, 0.8);
   color: #fff;
 }
 
 .btn.btn-d:hover,
 .btn.btn-d:focus {
-  background: #111111;
+  background: #571b3c;
 }
 
 .btn.btn-b {
@@ -810,45 +810,6 @@ a,
   color: #fff;
 }
 
-/* Forms common style */
-.form-control {
-  font-family: "Roboto Condensed", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 11px;
-  height: 33px;
-  border: 1px solid #EAEAEA;
-  border-radius: 2px;
-  transition: all 0.4s ease-in-out 0s;
-}
-
-.form-control:focus {
-  border-color: #CACACA;
-}
-
-/* Forms size */
-.input-lg,
-.form-horizontal .form-group-lg .form-control {
-  height: 43px;
-  font-size: 13px;
-}
-
-.input-sm, .form-horizontal .form-group-sm .form-control {
-  height: 29px;
-  font-size: 10px;
-}
-
-.rqst-form {
-  margin-top: 27px;
-}
-
-.rqst-form .btn {
-  margin-top: 5px;
-}
-
-.input-group-addon {
-  border: 1px solid #e4e4e4 !important;
-}
 
 /*--------------------------------------------------------------
 	Typography
@@ -1239,7 +1200,7 @@ General Styles - Owlcarousel
 	Navbar
 --------------------------------------------------------------*/
 .navbar-custom {
-  background-color: rgba(10, 10, 10, 0.9);
+  background-color: rgba(17, 22, 37, 0.9);
   border: 0;
   border-radius: 0;
   z-index: 1000;
@@ -1255,7 +1216,7 @@ General Styles - Owlcarousel
 }
 
 .navbar-custom .dropdown-menu {
-  background: rgba(26, 26, 26, 0.9);
+  background: rgba(52, 25, 49, 0.9);
   border-radius: 0;
   border: 0;
   padding: 0;
@@ -2976,4 +2937,28 @@ Google map
 }
 .progress-bar.progress-bar-5 {
   background-color: #27ae60 !important;
+}
+
+
+.chart {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 40px auto;
+  position: relative;
+  text-align: center;
+}
+.chart span {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-top: -30px;
+  width: 100%;
+}
+.chart span strong {
+  display: block;
+}
+.chart canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
 }
